@@ -1,59 +1,73 @@
+# number is a string
 def is_armstrong(number):
-    """ Helper function to determine if a number is an Armstrong number """
+    """ Checks if the number is an Armstrong number """
 
-    # Break up the digits
-    digits = list(str(number))
+    # Extract digits
+    digits = list(number)
+    for i in range(len(digits)):
+        digits[i] = int(digits[i]) ** len(digits)
 
-    # Check for Armstrong
-    total = 0
-    for digit in digits:
-        total += int(digit) ** len(digits)
-
-    return total == number
+    # Do the math
+    return sum(digits) == int(number)
 
 
-def Armstrong_number(a, b):
-    """ Returns a list of Armstrong numbers between, and including, a and b"""
+def Armstrong_number(start, end):
+    """ Returns list of all Armstrong numbers """
 
-    armstrong_numbers = []
+    # Loop and check
+    arm_numbers = []
 
-    # Check each number
-    for num in range(min(a, b), max(a, b)+1):
-        if is_armstrong(num):
-            armstrong_numbers.append(num)
+    for number in range(start, end+1):
+        # Input for function is a string
+        if is_armstrong(str(number)):
+            arm_numbers.append(number)
 
-    return armstrong_numbers
+    return arm_numbers
 
 
-# Input validation for first number
-first_number = input("Enter an integer: ")
-while True:
-    try:
-        first_number = int(first_number)
+def main():
+    """ main function """
+    # Grab first number
+    a = input("Enter an integer: ")
 
-        # Edge case: non postiive number
-        if first_number <= 0:
-            first_number = input("Need a positive integer: ")
-            continue
+    # Validate a
+    while True:
+        try:
+            a = int(a)
 
-        break
-    except:
-        first_number = input("Bad input! Try again: ")
+            # Check if positive
+            if a <= 0:
+                a = input("Need a positive integer: ")
+                continue
+            break
+        except:
+            a = input("Bad input! Try again: ")
 
-# Input validation for second number
-second_number = input("Enter another integer: ")
-while True:
-    try:
-        second_number = int(second_number)
+    # Grab second number
+    b = input("Enter another integer: ")
 
-        # Edge case: non postiive number
-        if second_number <= 0:
-            second_number = input("Need a positive integer: ")
-            continue
+    # Validate b
+    while True:
+        try:
+            b = int(b)
 
-        break
-    except:
-        second_number = input("Bad input! Try again: ")
+            # Check if positive
+            if b <= 0:
+                b = input("Need a positive integer: ")
+                continue
+            break
+        except:
+            b = input("Bad input! Try again: ")
 
-# Output
-print("Armstrong numbers:", Armstrong_number(first_number, second_number))
+    # Calculate start and end
+    start = min(a, b)
+    end = max(a, b)
+    result = Armstrong_number(start, end)
+
+    # Output
+    print("Armstrong numbers:", result)
+
+
+if __name__ == "__main__":
+    main()
+

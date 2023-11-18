@@ -1,14 +1,20 @@
 import numpy as np
 
-def matmultiply(A, B):
-    """ Multiply matrices A and B if valid """
-    inner_A = A.shape[1]
-    inner_B = B.shape[0]
+def matrix_mult(mat1, mat2):
+    """ Calculates the cross product of the two matrices if possible"""
 
-    # If the inner dimensions don't match
-    if inner_A != inner_B:
+    inner_mat1 = mat1.shape[1]
+    inner_mat2 = mat2.shape[0]
+
+    # Return empty array if not matching
+    if inner_mat1 != inner_mat2:
         return np.array([])
     
-    # If the inner dimensions do match
     else:
-        return np.matmul(A, B)
+        return np.matmul(mat1, mat2)  # Equivalent to return mat1 @ mat2
+    
+
+A = np.array([[0, 1], [2, 3]])
+B = np.array([[ 0,  1,  2,  3], [ 4,  5,  6,  7] ,[ 8,  9, 10, 11]])
+
+print(matrix_mult(A, B))

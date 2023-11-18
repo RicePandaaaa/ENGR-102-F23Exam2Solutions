@@ -1,30 +1,41 @@
-# Open a file
+# Open the file
 with open("grades.txt", "w") as output_file:
     # Get number of students
-    num_students = int(input("Enter the number of students: "))
+    num_of_students = int(input("Enter the number of students: "))
 
-    # Store each student and their grades
-    student_names = []
-    student_grades = []
+    # Store data
+    total_score = 0
+    names = []
+    scores = []
 
-    for _ in range(num_students):
-        name, grade = input("Enter the next name and score: ").split(" ")
-        grade = float(grade)
+    # Get the name and scores
+    for _ in range(num_of_students):
+        next_line = input("Enter the next name and score: ")
+        name, score = next_line.split()
+        score = float(score)
 
-        student_names.append(name)
-        student_grades.append(grade)
+        # Add to sum
+        total_score += score
 
-    # Calculate the average
-    average_grade = sum(student_grades) / len(student_grades)
-    print(f"The average grade for this quiz is {average_grade:.1f}")
+        # Add to lists
+        names.append(name)
+        scores.append(score)
 
-    # Calculate column length
-    name_col_len = 6
+    # Figure out the average
+    score_average = total_score / num_of_students
+    print(f"The average grade for this quiz is {score_average:.1f}")
 
-    for name in student_names:
-        name_col_len = max(len(name) + 2, name_col_len)
+    # Figure out column size
+    column_size = len("Name") + 2  # Equal to 6
+    for name in names:
+        column_size = max(column_size, len(name) + 2)
 
-    # Write to the file
-    output_file.write(f"{'Name':<{name_col_len}}Score\n")
-    for i in range(num_students):
-        output_file.write(f"{student_names[i]:<{name_col_len}}{student_grades[i]:.1f} \n")
+    # Write the header line
+    output_file.write(f"{'Name':<{column_size}}Score\n")
+
+    # Write rest of lines
+    for i in range(len(names)):
+        output_file.write(f"{names[i]:<{column_size}}{scores[i]:.1f}\n")
+
+
+

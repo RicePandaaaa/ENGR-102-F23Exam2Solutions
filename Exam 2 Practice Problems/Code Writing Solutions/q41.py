@@ -1,40 +1,42 @@
-def perfect(num):
-    """ Returns True if num is a perfect number, False otherwise"""
-    # 6 is smallest perfect number so False if num < 6
-    if num < 6:
-        return False
-    
-    # Loop through all possible divisors
+def is_perfect(number):
+    """ Determines if number is perfect or not """
+
     divisors = []
 
-    for i in range(1, num // 2 + 1):
-        if num % i == 0:
-            divisors.append(i)
+    # Loop and find divisor
+    for divisor in range(1, number):
+        if number % divisor == 0:
+            divisors.append(divisor)
 
-    return sum(divisors) == num
-
-
-# Input validation for first number
-number = input("Enter an integer: ")
-while True:
-    try:
-        number = int(number)
-
-        # Edge case: non postiive number
-        if number <= 0:
-            number = input("Need a positive integer: ")
-            continue
-
-        break
-    except:
-        number = input("Bad input! Try again: ")
-
-result = ""
-if not perfect(number):
-    result = "not "
-
-# Output
-print(f"{number} is {result}a perfect number")
+    # Do the math
+    return sum(divisors) == number
 
 
+def main():
+    """ main function """
 
+    # Get the input
+    num = input("Enter an integer: ")
+
+    # Validate the number
+    while True:
+        try:
+            num = int(num)
+
+            # Check if is positive integer
+            if num <= 0:
+                num = input("Need a positive integer: ")
+                continue
+
+            break
+        except:
+            num = input("Bad input! Try again: ")
+
+    # Do the output
+    if is_perfect(num):
+        print(f"{num} is a perfect number")
+    else:
+        print(f"{num} is not a perfect number")
+
+if __name__ == "__main__":
+    main()

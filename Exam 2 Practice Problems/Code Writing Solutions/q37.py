@@ -1,58 +1,41 @@
-"""
-You need the commented line but for the sake of example and testing,
-I will make the function isprime myself in this file. Essentially,
-my solution will uncomment line 8 and will not contain my implementation
-of isprime
-"""
+from ENGR102 import isprime
 
-# from ENGR102 import isprime 
-import math 
+# Get input for a
+a = input("Enter an integer: ")
 
-def isprime(a):
-    if a == 2:
-        return True
-    
-    if a < 2:
-        return False
-
-    for i in range(2, int(math.sqrt(a))+1):
-        if a % i == 0:
-            return False
-        
-    return True
-
-# Input validation for first number
-number1 = input("Enter an integer: ")
-
+# Keep re-asking until a is a valid integer
 while True:
     try:
-        number1 = int(number1)
+        a = int(a)
         break
     except:
-        number1 = input("Bad input! Try again: ")
+        a = input("Bad input! Try again: ")
 
-# Input validation for first number
-number2 = input("Enter another integer: ")
+# Get input for b
+b = input("Enter another integer: ")
 
+# Keep re-asking until b is a valid integer
 while True:
     try:
-        number2 = int(number2)
+        b = int(b)
         break
     except:
-        number2 = input("Bad input! Try again: ")
+        b = input("Bad input! Try again: ")
 
-# Loop and check for primes
+# Calculate start and end
 primes = []
+start = min(a, b)
+end = max(a, b)
 
-for number in range(min(number1, number2), max(number1, number2)+1):
-    if number % 2 == 0:
-        continue
-    else:
-        if isprime(number):
-            primes.append(number)
+# Loop through start and end inclusive and check for primes
+for num in range(start, end+1):
+    if num % 2 == 1 and isprime(num):
+        primes.append(num)
 
-# Output
-if len(primes) == 0:
-    print("No primes found!")
+# If list exists, output it
+if len(primes) > 0:
+    print("Primes:", primes)
+
+# If list is empty, let the user know
 else:
-    print(f"Primes: {primes}")
+    print("No primes found!")

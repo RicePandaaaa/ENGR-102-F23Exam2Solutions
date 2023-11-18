@@ -1,35 +1,39 @@
 import numpy as np
 
 # Read the file
-with open("Exam 2 Practice Problems\\Code Writing Solutions\\data.dat", "r") as f:
-    # Skip the first line
-    f.readline()
+with open("data.dat", "r") as input_file:
+    # Read the headers
+    headers = []
 
-    # Get the headers
-    header_names = f.readline().strip()[2:].split(",")
-    header_units = f.readline().strip()[3:-1].split("),(")
+    for i in range(3):
+        headers.append(input_file.readline().strip())
 
-    # Put stuff into a numpy array
-    data = []
+    # Extract units
+    units = headers[2].strip()[3:-1].split("),(")
+    temp_unit = units[1].split(" ")[1]
+    wind_unit = units[2]
 
-    for line in f.readlines():
-        values = line.split(",")
-        for i in range(len(values)):
-            values[i] = float(values[i])
+    # Read the data
+    data = input_file.readlines()
 
-        data.append(values)
+    # Clean the data
+    for i in range(len(data)):
+        new_line = data[i].strip()
+        line_data = new_line.split(",")
+        
+        # Convert strings to floats
+        for j in range(3):
+            line_data[j] = float(line_data[j])
 
-    np_data = np.array(data)
+        data[i] = line_data
 
-    # Minimum temperature
-    temperatures = np_data[:, 1]
-    min_temperature = np.min(temperatures)
+    # Make numpy array
+    npData = np.array(data)
 
-    # Maximum windspeed
-    windspeeds = np_data[:, 2]
-    max_windspeed = np.max(windspeeds)
+    # Get stats
+    min_temp = np.min(npData[:, 1])
+    max_wind = np.max(npData[:, 2])
 
     # Output
-    print(f"Minimum temperature is {min_temperature} {header_units[1]}")
-    print(f"Maximum windspeed is {max_windspeed} {header_units[2]}")
-        
+    print(f"Minimum temperature is {min_temp:.2f} {temp_unit}")
+    print(f"Maximum windspeed is {max_wind:.2f} {wind_unit}")

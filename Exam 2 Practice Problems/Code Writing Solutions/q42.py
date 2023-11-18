@@ -1,27 +1,26 @@
 # Open the file
-
-with open("E:\F23Exam2PracticeSolutions\Exam 2 Practice Problems\Code Writing Solutions\item_cost.dat", "r") as f:
+with open("item_cost.dat", "r") as input_file:
     # Skip the header
-    f.readline()
+    input_file.readline()
 
-    # Keep track of most expensive item
-    highest_name = ""
+    # Read in the lines and compare
     highest_cost = ""
+    highest_name = ""
 
-    for line in f.readlines():
-        # Split up the line
-        name, cost = line.split(",")
+    lines = input_file.readlines()
+    for line in lines:
+        # Split the data
+        name, cost = line.strip().split(",")
         cost = float(cost)
 
-        # Set the first item to most expensive
-        if highest_name == "" and highest_cost == "":
-            highest_name = name
+        # Default values
+        if highest_cost == "":
             highest_cost = cost
-
-        # Compare
-        if cost > highest_cost:
             highest_name = name
-            highest_cost = cost
 
-    # Output
-    print(f"THe most expensive item is {highest_name} and costs ${highest_cost:.2f}")
+        # Compare and check
+        if highest_cost < cost:
+            highest_cost = cost
+            highest_name = name
+
+    print(f"The most expensive item is {highest_name} and costs ${highest_cost:.2f}")
