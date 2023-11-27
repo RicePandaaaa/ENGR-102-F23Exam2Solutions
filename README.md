@@ -6,3 +6,7 @@ Main set of problems: https://youtu.be/MGtsMMKBJco <br>
 Additional set: https://youtu.be/I198gkjpnqE <br>
 
 If you believe there are any errors or you simply have questions, reach out to me on the <a href="https://tx.ag/taoserver">Discord server</a> or via email (anthony.ha.pham@tamu.edu)!
+
+## Changes made
+
+More Practice Problems, q05.py: I accidently used `total` instead of `count` for variance. The code has been updated to reflect the correct formula.
