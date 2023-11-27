@@ -17,6 +17,6 @@ def stats(numbers):
     for number in numbers:
         variance_summation += (number - average) ** 2
 
-    variance_summation /= total
+    variance_summation /= count
 
     return average, variance_summation
